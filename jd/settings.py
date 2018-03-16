@@ -19,6 +19,8 @@ FEED_URI = '/home/xianwu1/crawler/result.json'
 FEED_FORMAT = 'json'
 FEED_EXPORT_ENCODING = 'utf-8'
 
+# pause crawler
+JOB_DIR='/home/xianwu1/crawler/spider_dir-1'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/60.0.3112.78 Chrome/60.0.3112.78 Safari/537.36'
@@ -27,7 +29,19 @@ USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Ge
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 100
+
+# Log level
+LOG_LEVEL = 'INFO'
+
+# Retry
+RETRY_ENABLED = True
+
+# Download timeout
+DOWNLOAD_TIMEOUT = 15
+
+# Redirect
+REDIRECT_ENABLED = False
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -38,7 +52,7 @@ ROBOTSTXT_OBEY = False
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
