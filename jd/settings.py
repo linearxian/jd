@@ -36,6 +36,7 @@ LOG_LEVEL = 'INFO'
 
 # Retry
 RETRY_ENABLED = True
+RETRY_TIMES = 255
 
 # Download timeout
 DOWNLOAD_TIMEOUT = 15
