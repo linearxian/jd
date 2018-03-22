@@ -15,7 +15,7 @@ SPIDER_MODULES = ['jd.spiders']
 NEWSPIDER_MODULE = 'jd.spiders'
 
 
-FEED_URI = '/home/xianwu1/crawler/result.json'
+FEED_URI = '/home/xianwu1/crawler/result_shanghai.json'
 FEED_FORMAT = 'json'
 FEED_EXPORT_ENCODING = 'utf-8'
 

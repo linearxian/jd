@@ -17,7 +17,7 @@ category = [
     '/ershoufree/',
 ]
 
-city = 'http://bj.ganji.com'
+city = 'http://sh.ganji.com'
 
 urls = []
 
