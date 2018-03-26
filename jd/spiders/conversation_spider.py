@@ -10,19 +10,36 @@ from scrapy.crawler import CrawlerRunner
 from scrapy.utils.log import configure_logging
 from scrapy.utils.project import get_project_settings
 
+import sys
+sys.path.append("/home/xianwu1/crawler/jd/jd")
+import db
+from useragents import agents
+import random
+
 
 def parse_answer(q_id):
     i = 1
     answers = []
     q_id = int(q_id)
+    conn = db.RedisClient()
     while True:
         with requests.session() as MySession:
             url = 'http://question.jd.com/question/getAnswerListById.action'
+            waittime = 10
+            ip1 = conn.random()
+            ip1 = 'http://{}'.format(ip1)
+            ip2 = conn.random()
+            ip2 = 'http://{}'.format(ip2)
+            proxies = {"http": ip1, "https": ip2, }
+            agent = random.choice(agents)
+            headers = {
+                agent
+            }
             data = {
                 'questionId':'%d' %q_id,
                 'page':i
             }
-            data = MySession.get(url, params=data).text
+            data = MySession.get(url, params=data, proxies=proxies, headers = headers, timeout=waittime).text
             if data:
                 lines = re.findall('"content":"(.*?)"', data)
                 if lines:
@@ -42,14 +59,25 @@ def parse_product(p_id):
     i = 1
     content = []
     p_id = int(p_id)
+    conn = db.RedisClient()
     while True:
         with requests.session() as MySession:
             url = 'http://question.jd.com/question/getQuestionAnswerList.action'
+            waittime = 10
+            ip1 = conn.random()
+            ip1 = 'http://{}'.format(ip1)
+            ip2 = conn.random()
+            ip2 = 'http://{}'.format(ip2)
+            proxies = {"http": ip1, "https": ip2, }
+            agent = random.choice(agents)
+            headers = {
+                agent
+            }
             API = {
                 'productId':'%d' %p_id,
                 'page':i
             }
-            data = MySession.get(url, params=API).text
+            data = MySession.get(url, params=API, proxies=proxies, headers = headers, timeout=waittime).text
             if data:
                 lines = re.findall(r'"id":(\d+),"content":"(.*?)"', data)
                 loop = 1
@@ -76,7 +104,12 @@ class JDConversationSpider(CrawlSpider):
     name = "JDConversation"
     download_delay = 3
     start_urls = [
-        "http://list.jd.com/list.html?cat=9987,653,655&page=1&delivery=1&sort=sort_rank_asc&trans=1&JL=4_10_0#J_main"
+        # "http://list.jd.com/list.html?cat=9987,653,655&page=1&delivery=1&sort=sort_rank_asc&trans=1&JL=4_10_0#J_main"
+        'http://list.jd.com/list.html?cat=737,794,798',
+        'http://list.jd.com/list.html?cat=737,794,870',
+        'http://list.jd.com/list.html?cat=737,794,880',
+        'http://list.jd.com/list.html?cat=737,794,878',
+        'http://coll.jd.com/list.html?sub=4932',
     ]
 
     def parse(self,response):
