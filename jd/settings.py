@@ -15,7 +15,7 @@ SPIDER_MODULES = ['jd.spiders']
 NEWSPIDER_MODULE = 'jd.spiders'
 
 
-FEED_URI = '/home/xianwu1/crawler/result_shanghai.json'
+FEED_URI = '/home/xianwu1/crawler/result_sasa.json'
 FEED_FORMAT = 'json'
 FEED_EXPORT_ENCODING = 'utf-8'
 
@@ -29,17 +29,17 @@ USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Ge
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 100
+CONCURRENT_REQUESTS = 64
 
 # Log level
 # LOG_LEVEL = 'INFO'
 
 # Retry
 RETRY_ENABLED = True
-RETRY_TIMES = 255
+RETRY_TIMES = 100
 
 # Download timeout
-DOWNLOAD_TIMEOUT = 15
+DOWNLOAD_TIMEOUT = 150
 
 # Redirect
 REDIRECT_ENABLED = False

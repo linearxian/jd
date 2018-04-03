@@ -18,9 +18,9 @@ class EnZhItem(scrapy.Item):
     Title_zh = scrapy.Field()
     Desc_zh = scrapy.Field()
 
-class GanjiSpider(CrawlSpider):
+class SasaSpider(CrawlSpider):
     name = 'sasa'
-    download_delay = 3
+    download_delay = 1
 
     allowed_domains = ['sasa.com'
     ]
@@ -80,7 +80,7 @@ class GanjiSpider(CrawlSpider):
 def run():
     configure_logging()
     runner = CrawlerRunner(get_project_settings())
-    d = runner.crawl(GanjiSpider)
+    d = runner.crawl(SasaSpider)
     d.addBoth(lambda _: reactor.stop())
     reactor.run() # the script will block here until the crawling is finished
 
